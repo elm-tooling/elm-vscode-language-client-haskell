@@ -1,29 +1,81 @@
+/* --------------------------------------------------------------------------------------------
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ * ------------------------------------------------------------------------------------------ */
 'use strict';
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+import { workspace, ExtensionContext } from 'vscode';
 
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "elm-vscode-language-client" is now active!');
+import {
+    LanguageClient,
+    LanguageClientOptions,
+    ServerOptions,
+    TransportKind
+} from 'vscode-languageclient';
 
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
-        // The code you place here will be executed every time your command is executed
+import { dirname, join } from 'path';
 
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
-    });
+let client: LanguageClient;
 
-    context.subscriptions.push(disposable);
+export async function activate(context: ExtensionContext) {
+    // We get activated if there is one or more elm.json file in the workspace
+    // Start one server for each directory with an elm.json
+    // and watch Elm files in those directories.
+    let elmJsons = await workspace.findFiles("**/elm.json");
+    for (let uri of elmJsons) {
+        startClient(dirname(uri.fsPath));
+    }
+    // TODO: watch for addition and removal of 'elm.json' files
+    // and start and stop clients for those directories.
 }
 
-// this method is called when your extension is deactivated
-export function deactivate() {
+let clients: Map<string, LanguageClient> = new Map();
+function startClient(dir: string) {
+    if (clients.has(dir)) {
+        // Client was already started for this directory
+        return;
+    }
+
+    let serverPath = "elm-language-server";
+
+    // If the extension is launched in debug mode then the debug server options are used
+    // Otherwise the run options are used
+    let serverOptions: ServerOptions = {
+        run: { command: serverPath, transport: TransportKind.stdio },
+        debug: { command: serverPath, transport: TransportKind.stdio }
+    };
+
+    // Options to control the language client
+    let clientOptions: LanguageClientOptions = {
+        // Register the server for Elm documents in the directory
+        documentSelector: [
+            {
+                scheme: 'file', pattern: join(dir, "**", "*.elm")
+            }
+        ],
+        // Notify the server about file changes to 'elm.json'
+        synchronize: {
+            fileEvents: workspace.createFileSystemWatcher(join(dir, 'elm.json'))
+        }
+    };
+
+    // Create the language client and start the client.
+    client = new LanguageClient(
+        'languageServerExample',
+        'Language Server Example',
+        serverOptions,
+        clientOptions
+    );
+
+    // Start the client. This will also launch the server
+    client.start();
+    clients.set(dir, client);
+}
+
+export function deactivate(): Thenable<void> {
+    let promises: Thenable<void>[] = [];
+    for (let client of clients.values()) {
+        promises.push(client.stop());
+    }
+    return Promise.all(promises).then(() => undefined);
 }
