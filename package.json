@@ -1,19 +1,19 @@
 {
     "name": "elm-vscode-language-client",
     "displayName": "elm-vscode-language-client",
-    "description": "Elm VSCode Language Client",
+    "description": "Elm support for VSCode",
     "version": "0.0.1",
     "publisher": "norpan",
     "engines": {
-        "vscode": "^1.26.0"
+        "vscode": "^1.28.0"
     },
     "categories": [
         "Programming Languages"
     ],
-    "activationEvents": [
-        "workspaceContains:**/elm.json"
-    ],
-    "main": "./out/extension",
+        "activationEvents": [
+            "workspaceContains:**/elm.json"
+        ],
+        "main": "./out/extension",
     "contributes": {
         "languages": [
             {
@@ -24,23 +24,42 @@
                 ],
                 "extensions": [
                     ".elm"
-                ]
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "scopeName": "markdown.elm.codeblock",
+                "path": "./syntaxes/codeblock.json",
+                "injectTo": [
+                    "text.html.markdown"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.block.elm": "elm",
+                    "meta.embedded.block.glsl": "glsl"
+                }
+            },
+            {
+                "language": "elm",
+                "scopeName": "source.elm",
+                "path": "./syntaxes/elm.json"
             }
         ]
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.21",
-        "vscode-languageclient": "^4.1.4",
-        "tslint": "^5.8.0",
-        "@types/node": "^8.10.25",
-        "@types/mocha": "^2.2.42"
+            },
+            "scripts": {
+                "vscode:prepublish": "npm run compile",
+                "compile": "tsc -p ./",
+                "watch": "tsc -watch -p ./",
+                "postinstall": "node ./node_modules/vscode/bin/install",
+                "test": "npm run compile && node ./node_modules/vscode/bin/test"
+            },
+            "devDependencies": {
+                "typescript": "^3.1.6",
+                "vscode": "^1.1.21",
+                "vscode-languageclient": "^5.1.1",
+                "tslint": "^5.8.0",
+                "@types/node": "^10.12.2",
+                "@types/mocha": "^5.2.5"
     }
 }
