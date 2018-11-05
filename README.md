@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Razzeee/elm-vscode-language-client.svg?branch=master)](https://travis-ci.org/Razzeee/elm-vscode-language-client)
+
 # elm-vscode-ls
 
 This vscode extension is in development and might be lacking features you know working from `vscode-elm`.
