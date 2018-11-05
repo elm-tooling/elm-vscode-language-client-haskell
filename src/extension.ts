@@ -64,7 +64,7 @@ function startClient(dir: string) {
 
     // Create the language client and start the client.
     client = new LanguageClient(
-        'elmLanguageServer',
+        'elmLS',
         'Elm Language Server',
         serverOptions,
         clientOptions

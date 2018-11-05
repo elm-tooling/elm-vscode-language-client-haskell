@@ -1,6 +1,6 @@
 {
-    "name": "elm-vscode-language-client",
-    "displayName": "elm-vscode-language-client",
+    "name": "elm-vscode-ls",
+    "displayName": "elm-vscode-ls",
     "description": "Elm support for VSCode",
     "version": "0.0.1",
     "publisher": "norpan",
@@ -50,7 +50,7 @@
             "type": "object",
             "title": "Elm configuration",
             "properties": {
-                "elmLanguageServer.trace.server": {
+                "elmLS.trace.server": {
                     "scope": "window",
                     "type": "string",
                     "enum": [
