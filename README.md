@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Razzeee/elm-vscode-language-client.svg?branch=master)](https://travis-ci.org/Razzeee/elm-vscode-language-client)
+[![Build Status](https://travis-ci.org/elm-tooling/elm-vscode-language-client.svg?branch=master)](https://travis-ci.org/elm-tooling/elm-vscode-language-client)
 
 # elm-vscode-ls
 
@@ -12,7 +12,7 @@ This vscode extension is in development and might be lacking features you know w
 
 ## Requirements
 
-You will need to have an executable of this repo on your path https://github.com/matheus23/elm-language-server
+You will need to have an executable of this repo on your path https://github.com/elm-tooling/elm-language-server
 Just open the repo and follow those instructions, for now. We will prebuild the binarys at a later point in time.
 
 ## Extension Settings
