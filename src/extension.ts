@@ -37,10 +37,7 @@ function startClient(dir: string) {
     }
 
     let serverPath = 'elm-language-server';
-    let debugArgs = [
-            '--server-log-file', 'c:/dev/elm-lsp-log.txt',
-            '--session-log-file', 'c:/dev/elm-lsp-log-session.txt'
-        ];
+    let debugArgs: string[] = [];
     // If the extension is launched in debug mode then the debug server options are used
     // Otherwise the run options are used
     let serverOptions: ServerOptions = {
