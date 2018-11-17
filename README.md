@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/elm-tooling/elm-vscode-language-client.svg?branch=master)](https://travis-ci.org/elm-tooling/elm-vscode-language-client)
+[![Build Status](https://dev.azure.com/razzeee/elm-tooling/_apis/build/status/elm-tooling.elm-vscode-language-client)](https://dev.azure.com/razzeee/elm-tooling/_build/latest?definitionId=1)
 
 # elm-vscode-ls
 
