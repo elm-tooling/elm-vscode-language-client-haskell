@@ -1,82 +1,84 @@
 {
-    "name": "elm-vscode-ls",
-    "displayName": "elm-vscode-ls",
-    "description": "Elm support for VSCode",
-    "version": "0.0.1",
-    "publisher": "norpan",
-    "engines": {
-        "vscode": "^1.28.0"
-    },
-    "categories": [
-        "Programming Languages"
-    ],
-    "activationEvents": [
-        "workspaceContains:**/elm.json"
-    ],
-    "main": "./out/extension",
-    "contributes": {
-        "languages": [
-            {
-                "id": "elm",
-                "aliases": [
-                    "Elm",
-                    "elm"
-                ],
-                "extensions": [
-                    ".elm"
-                ],
-                "configuration": "./language-configuration.json"
-            }
+  "name": "elm-vscode-ls",
+  "displayName": "elm-vscode-ls",
+  "description": "Elm support for VSCode",
+  "version": "0.0.1",
+  "publisher": "norpan",
+  "engines": {
+    "vscode": "^1.28.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/elm.json"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "languages": [
+      {
+        "id": "elm",
+        "aliases": [
+          "Elm",
+          "elm"
         ],
-        "grammars": [
-            {
-                "scopeName": "markdown.elm.codeblock",
-                "path": "./syntaxes/codeblock.json",
-                "injectTo": [
-                    "text.html.markdown"
-                ],
-                "embeddedLanguages": {
-                    "meta.embedded.block.elm": "elm",
-                    "meta.embedded.block.glsl": "glsl"
-                }
-            },
-            {
-                "language": "elm",
-                "scopeName": "source.elm",
-                "path": "./syntaxes/elm.json"
-            }
+        "extensions": [
+          ".elm"
         ],
-        "configuration": {
-            "type": "object",
-            "title": "Elm configuration",
-            "properties": {
-                "elmLS.trace.server": {
-                    "scope": "window",
-                    "type": "string",
-                    "enum": [
-                        "off",
-                        "messages",
-                        "verbose"
-                    ],
-                    "default": "off",
-                    "description": "Traces the communication between VS Code and the language server."
-                }
-            }
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "scopeName": "markdown.elm.codeblock",
+        "path": "./syntaxes/codeblock.json",
+        "injectTo": [
+          "text.html.markdown"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.elm": "elm",
+          "meta.embedded.block.glsl": "glsl"
         }
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^3.1.6",
-        "vscode": "^1.1.21",
-        "vscode-languageclient": "^5.1.1",
-        "tslint": "^5.8.0",
-        "@types/node": "^10.12.2",
-        "@types/mocha": "^5.2.5"
+      },
+      {
+        "language": "elm",
+        "scopeName": "source.elm",
+        "path": "./syntaxes/elm.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Elm configuration",
+      "properties": {
+        "elmLS.trace.server": {
+          "scope": "window",
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the language server."
+        }
+      }
     }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test",
+    "format": "prettier --write \"src/**/*.ts\""
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.2",
+    "prettier": "1.15.2",
+    "tslint": "^5.8.0",
+    "typescript": "^3.1.6",
+    "vscode": "^1.1.21",
+    "vscode-languageclient": "^5.1.1"
+  }
 }
