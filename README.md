@@ -1,6 +1,10 @@
 [![Build Status](https://dev.azure.com/razzeee/elm-tooling/_apis/build/status/elm-tooling.elm-vscode-language-client)](https://dev.azure.com/razzeee/elm-tooling/_build/latest?definitionId=1)
 
-# elm-vscode-ls
+# elm-vscode-language-client-haskell (archived)
+
+**NOTE:** This plugin is deprecated in favour of [elm-language-client-vscode](https://github.com/elm-tooling/elm-language-client-vscode).
+
+---
 
 This vscode extension is in development and might be lacking features you know working from `vscode-elm`.
 
